@@ -9,13 +9,20 @@ function Navbar() {
                     <div className="logo uppercase">
                         <Link to="/">
                             {/* <img src={logo} alt="search" /> */}
-                           Tanjim's Blog
+                         My Movies
                         </Link>
+                    </div>
+                    <div className="flex gap-x-10">
+                        <button>Movies</button>
+                        <button>TV Shows</button>
+                        <button>Genres</button>
+                        <button>More</button>
                     </div>
                     {/* <!-- auth buttons , This will nonfunctional, just for nice looking --> */}
                     <div className="auth-buttons">
-                        <button className="btn btn-primary">sign in</button>
-                        <button className="btn btn-outline">sign up</button>
+                        <button className="btn btn-primary">+</button>
+                        <button className="btn btn-outline">Account</button>
+                        <button className="btn btn-outline">Search</button>
                     </div>
                 </div>
             </nav>

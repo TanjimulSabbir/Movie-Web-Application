@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getMovies } from "../../../Tools/MoviesApi";
 import axios from "axios";
 const initialState = {
     lists: [],

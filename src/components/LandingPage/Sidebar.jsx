@@ -1,56 +1,48 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchGenreLists} from "../../Redux/Features/GenreLists/GenreListsSlice.js"
+import { fetchGenreLists } from "../../Redux/Features/GenreLists/GenreListsSlice.js"
 import Loading from "../Shared/Loading";
 
 function Sidebar() {
     const dispatch = useDispatch();
     const { lists, isLoading, isError, error } = useSelector((state) => state.genreListsReducer);
 
-console.log(lists)
+    console.log(lists)
 
     useEffect(() => {
         dispatch(fetchGenreLists())
-    },[dispatch])
+    }, [dispatch])
 
 
-    if (isLoading) return <Loading />
+    // if (isLoading) return <Loading />
     if (isError) return <p>{error.message}</p>
     if (lists?.length < 0) {
-        return <p>Lists Not found</p>
+        return <p>Genre not found</p>
     }
     return (
         <aside>
             <div className="sidebar-items">
                 <div className="sidebar-content">
                     <h4>Sort</h4>
-                    <select name="sort" id="lws-sort" className="w-full max-w-[150px] border-2 rounded-md text-gray-500">
+                    <select name="sort" id="lws-sort" className="w-full border-2 rounded-md text-gray-200">
                         <option value="">Popular</option>
-                        <option value="newest">Newest</option>
-                        <option value="most_liked">Most Liked</option>
-                        <option value="most_liked">Most Liked</option>
-                        <option value="most_liked">Most Liked</option>
-                        <option value="most_liked">Most Liked</option>
+                        <option value="newest">Now Playing</option>
+                        <option value="most_liked">Upcoming</option>
+                        <option value="most_liked">Top Rated</option>
                     </select>
                 </div>
                 <div className="sidebar-content">
-                    <h4>Filter</h4>
-                    <div className="radio-group">
-                        {/* <!-- handle filter on button click --> */}
-                        {/* <div>
-                            <input type="radio" name="filter" id="lws-all" checked className="radio" />
-                            <label htmlFor="lws-all">All</label>
-                        </div> */}
-                       {
-                        lists?.map(list=>{
-                            return(
-                                <div key={list.id}>
-                                <input type="radio" name="filter" id={list.id} checked className="radio" />
-                                <label htmlFor={list.id}>{list.name}</label>
-                            </div>
-                            )
-                        })
-                       }
+                    <h4>Genres</h4>
+                    <div className="grid grid-cols-2 gap-x-2 gap-y-3 items-center">
+                        {
+                            lists?.map(list => {
+                                return (
+                                    <div key={list.id} className="cursor-pointer">
+                                        <span className="lws-badge">{list.name} </span>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

@@ -6,28 +6,28 @@ const initialState = {
     isError: "",
     error: ""
 }
-export const fetchMovies = createAsyncThunk("movies/getMovies", async (queryString) => {
+export const fetchPopular = createAsyncThunk("Popular/getMovies", async (queryString) => {
     const data = await getMovies(queryString);
     return data.results;
 })
 
-const moviesSlice = createSlice({
-    name: "movies",
+const PopularSlice = createSlice({
+    name: "Popular",
     initialState,
     extraReducers: (builder) => {
-        builder.addCase(fetchMovies.pending, (state) => {
+        builder.addCase(fetchPopular.pending, (state) => {
                 state.movies = [],
                     state.isLoading = true,
                     state.isError = false,
                     state.error = ""
             })
-            builder.addCase(fetchMovies.fulfilled, (state, action) => {
+            builder.addCase(fetchPopular.fulfilled, (state, action) => {
                 state.movies = action.payload,
                     state.isLoading = false,
                     state.isError = false,
                     state.error = ""
             })
-            builder.addCase(fetchMovies.rejected, (state, action) => {
+            builder.addCase(fetchPopular.rejected, (state, action) => {
                 state.movies = [],
                     state.isLoading = false,
                     state.isError = true,
@@ -36,4 +36,4 @@ const moviesSlice = createSlice({
     }
 })
 
-export default moviesSlice.reducer;
+export default PopularSlice.reducer;

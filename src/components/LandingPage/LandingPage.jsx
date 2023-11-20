@@ -3,14 +3,15 @@ import { useDispatch, useSelector, } from "react-redux";
 import Loading from "../Shared/Loading";
 import Movie from "./Movie";
 import { useEffect } from "react";
-import { fetchMovies } from "../../Redux/Features/Movies/MoviesSlice";
+import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
+
 
 export default function LandingPage() {
     const dispatch = useDispatch();
-    const { movies, isLoading, isError, error } = useSelector((state) => state.moviesReducer);
+    const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 
     useEffect(() => {
-        dispatch(fetchMovies("now_playing"))
+        dispatch(fetchPopular("now_playing"))
     },[dispatch])
 
     let content;

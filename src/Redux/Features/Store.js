@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MoviesSlice from "./Movies/MoviesSlice";
 import GenreListsSlice from "./GenreLists/GenreListsSlice";
+import PopularSlice from "./Movies/PopularSlice";
 
 
 const store = configureStore({
-    reducer: { moviesReducer: MoviesSlice, genreListsReducer:GenreListsSlice }
+    reducer: { popularReducer: PopularSlice, genreListsReducer:GenreListsSlice }
 })
 
 export default store;
