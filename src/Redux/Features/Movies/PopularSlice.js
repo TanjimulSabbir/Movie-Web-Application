@@ -7,6 +7,7 @@ const initialState = {
     error: ""
 }
 export const fetchPopular = createAsyncThunk("Popular/getMovies", async (queryString) => {
+    console.log(queryString,"from fetchMovies")
     const data = await getMovies(queryString);
     return data.results;
 })

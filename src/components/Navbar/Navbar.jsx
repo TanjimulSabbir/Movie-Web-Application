@@ -1,6 +1,8 @@
-import logo from "../../assets/images/LWSBlog.svg"
 import {Link } from "react-router-dom"
 function Navbar() {
+    const handleChoice=()=>{
+
+    }
     return (
         <div>
             <nav className="py-4 border-b">
@@ -13,10 +15,10 @@ function Navbar() {
                         </Link>
                     </div>
                     <div className="flex gap-x-10">
-                        <button>Movies</button>
-                        <button>TV Shows</button>
-                        <button>Genres</button>
-                        <button>More</button>
+                        <button onClick={()=>handleChoice("movies")}>Movies</button>
+                        <button onClick={()=>handleChoice("tvshows")}>TV Shows</button>
+                        <button onClick={()=>handleChoice("genres")}>Genres</button>
+                        <button onClick={()=>handleChoice("more")}>More</button>
                     </div>
                     {/* <!-- auth buttons , This will nonfunctional, just for nice looking --> */}
                     <div className="auth-buttons">
