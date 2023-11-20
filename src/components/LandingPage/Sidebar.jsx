@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../../Redux/Features/Movies/MoviesSlice";
+import {fetchGenreLists} from "../../Redux/Features/GenreLists/GenreListsSlice.js"
 import Loading from "../Shared/Loading";
 
 function Sidebar() {
@@ -10,13 +10,13 @@ function Sidebar() {
 console.log(lists)
 
     useEffect(() => {
-        dispatch(fetchMovies("genre/movie/list"))
+        dispatch(fetchGenreLists())
     },[dispatch])
 
 
-    if (isLoading) <Loading />
+    if (isLoading) return <Loading />
     if (isError) return <p>{error.message}</p>
-    if (lists.genres?.length < 0) {
+    if (lists?.length < 0) {
         return <p>Lists Not found</p>
     }
     return (
@@ -42,7 +42,7 @@ console.log(lists)
                             <label htmlFor="lws-all">All</label>
                         </div> */}
                        {
-                        lists.genres?.map(list=>{
+                        lists?.map(list=>{
                             return(
                                 <div key={list.id}>
                                 <input type="radio" name="filter" id={list.id} checked className="radio" />

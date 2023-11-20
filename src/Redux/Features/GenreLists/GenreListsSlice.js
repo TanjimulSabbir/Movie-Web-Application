@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getMovies } from "../../../Tools/MoviesApi";
+import axios from "axios";
 const initialState = {
     lists: [],
     isLoading: false,
     isError: "",
     error: ""
 }
-export const fetchGenreLists = createAsyncThunk("genreLists/getMovies", async (queryString) => {
-    const data = await getMovies(queryString);
-    console.log(data,"genreLists")
-    return data;
+export const fetchGenreLists = createAsyncThunk("genreLists/getMovies", async () => {
+    const data = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=95735e862c8d7543ceee5364740d5db4");
+    return data.data.genres;
 })
 
 const genreListsSlice = createSlice({
