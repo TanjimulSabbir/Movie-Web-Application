@@ -1,28 +1,32 @@
-import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useDispatch, useSelector, } from "react-redux";
+import Loading from "../Shared/Loading";
+import Movie from "./movie";
+import { useEffect } from "react";
+import { fetchMovies } from "../../Redux/Features/Movies/MoviesSlice";
 
 export default function LandingPage() {
+    const dispatch = useDispatch();
+    const { videos, isLoading, isError, error } = useSelector((state) => state.moviesReducer);
+
+    useEffect(() => {
+        dispatch(fetchMovies("popular"))
+    })
+
+
+    let content;
+    if (isLoading) <Loading />
+    if (isLoading && isError) return <div>Network Error</div>
+    if (isError) return <p>{error}</p>
+    if (videos.length > 0) {
+        content = videos.map(movie => <Movie key={movie.id} movieData={movie}></Movie>)
+    }
+
     return (
         <section className="wrapper">
             <Sidebar />
             <main className="post-container" id="lws-postContainer">
-                <div className="lws-card">
-                    <Link to="/id">
-                        <img src="./images/git.webp" className="lws-card-image" alt="" />
-                    </Link>
-                    <div className="p-4">
-                        <div className="lws-card-header">
-                            <p className="lws-publishedDate">2023-05-01</p>
-                            <p className="lws-likeCount"><i className="fa-regular fa-thumbs-up"></i>100</p>
-                        </div>
-                        <Link to="/id" className="lws-postTitle"> Top Github Alternatives </Link>
-                        <div className="lws-tags"><span>#python,</span> <span>#tech,</span> <span>#git</span></div>
-                        {/* <!-- Show this element if post is saved --> */}
-                        <div className="flex gap-2 mt-4">
-                            <span className="lws-badge"> Saved </span>
-                        </div>
-                    </div>
-                </div>
+                {content}
             </main >
         </section>
     )
