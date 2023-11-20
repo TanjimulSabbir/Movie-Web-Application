@@ -1,13 +1,16 @@
+import logo from "../../assets/images/LWSBlog.svg"
+import {Link } from "react-router-dom"
 function Navbar() {
     return (
         <div>
             <nav className="py-4 border-b">
                 <div className="navbar-container">
                     {/* <!-- logo --> */}
-                    <div className="logo">
-                        <a href="index.html">
-                            <img src="./images/LWSBlog.svg" alt="search" />
-                        </a>
+                    <div className="logo uppercase">
+                        <Link to="/">
+                            {/* <img src={logo} alt="search" /> */}
+                           Tanjim's Blog
+                        </Link>
                     </div>
                     {/* <!-- auth buttons , This will nonfunctional, just for nice looking --> */}
                     <div className="auth-buttons">
