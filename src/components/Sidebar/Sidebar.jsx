@@ -1,6 +1,5 @@
 function Sidebar() {
     return (
-
         <aside>
             <div className="sidebar-items">
                 <div className="sidebar-content">
