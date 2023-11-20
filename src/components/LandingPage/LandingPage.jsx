@@ -1,6 +1,6 @@
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "./Sidebar";
 
-export default function PostContainer() {
+export default function LandingPage() {
     return (
         <section className="wrapper">
             <Sidebar />
@@ -20,7 +20,6 @@ export default function PostContainer() {
                         <div className="flex gap-2 mt-4">
                             <span className="lws-badge"> Saved </span>
                         </div>
-
                     </div>
                 </div>
             </main >
