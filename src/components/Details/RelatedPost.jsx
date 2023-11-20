@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function RelatedPost() {
     return (
         <aside>
@@ -5,13 +7,13 @@ function RelatedPost() {
             <div className="space-y-4 related-post-container">
                 {/* <!-- related post  --> */}
                 <div className="card">
-                    <a href="post.html">
+                    <Link to="/id">
                         <img src="./images/git.webp" className="card-image" alt="" />
-                    </a>
+                    </Link>
                     <div className="p-4">
-                        <a href="post.html" className="text-lg post-title lws-RelatedPostTitle">
+                        <Link to="/id" className="text-lg post-title lws-RelatedPostTitle">
                             Top Github Alternatives
-                        </a>
+                        </Link>
                         <div className="mb-0 tags">
                             <span>#python,</span> <span>#tech,</span> <span>#git</span>
                         </div>

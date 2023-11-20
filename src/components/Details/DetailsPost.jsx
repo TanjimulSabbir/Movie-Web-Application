@@ -1,9 +1,12 @@
+
+import {Link} from "react-router-dom"
+
 function DetailsPost() {
     return (
         <div>
             <div className="container mt-8">
-                <a href="index.html" className="inline-block text-gray-600 home-btn" id="lws-goHome"><i
-                    className="mr-2 fa-solid fa-house"></i>Go Home</a>
+                <Link to="/" className="inline-block text-gray-600 home-btn" id="lws-goHome"><i
+                    className="mr-2 fa-solid fa-house"></i>Go Home</Link>
             </div>
             <main className="post">
                 <img src="./images/mern.webp" alt="githum" className="w-full rounded-md" id="lws-megaThumb" />
