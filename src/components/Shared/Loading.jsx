@@ -1,6 +1,10 @@
 function Loading() {
   return (
-    <div className="text-blue-600 text-3xl text-center w-screen h-screen flex justify-center">Loading...</div>
+    <div className="w-full h-full flex items-center justify-center">
+      <p className="text-green-600 text-2xl">
+        Loading...
+      </p>
+    </div>
   )
 }
 

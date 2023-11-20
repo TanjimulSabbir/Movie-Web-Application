@@ -1,34 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getMovies } from "../../../Tools/MoviesApi";
 const initialState = {
-    movies: [],
+    lists: [],
     isLoading: false,
     isError: "",
     error: ""
 }
-export const fetchMovies = createAsyncThunk("movies/getMovies", async (queryString) => {
+export const fetchGenreLists = createAsyncThunk("genreLists/getMovies", async (queryString) => {
     const data = await getMovies(queryString);
-    return data.results;
+    console.log(data,"genreLists")
+    return data;
 })
 
-const moviesSlice = createSlice({
-    name: "movies",
+const genreListsSlice = createSlice({
+    name: "genreLists",
     initialState,
     extraReducers: (builder) => {
-        builder.addCase(fetchMovies.pending, (state) => {
-                state.movies = [],
+        builder.addCase(fetchGenreLists.pending, (state) => {
+                state.lists = [],
                     state.isLoading = true,
                     state.isError = false,
                     state.error = ""
             })
-            builder.addCase(fetchMovies.fulfilled, (state, action) => {
-                state.movies = action.payload,
+            builder.addCase(fetchGenreLists.fulfilled, (state, action) => {
+                state.lists = action.payload,
                     state.isLoading = false,
                     state.isError = false,
                     state.error = ""
             })
-            builder.addCase(fetchMovies.rejected, (state, action) => {
-                state.movies = [],
+            builder.addCase(fetchGenreLists.rejected, (state, action) => {
+                state.lists = [],
                     state.isLoading = false,
                     state.isError = true,
                     state.error = action.error;
@@ -36,4 +37,4 @@ const moviesSlice = createSlice({
     }
 })
 
-export default moviesSlice.reducer;
+export default genreListsSlice.reducer;

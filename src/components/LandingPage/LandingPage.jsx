@@ -16,7 +16,7 @@ export default function LandingPage() {
     let content;
     if (isLoading) content= <Loading />
     if (isLoading && isError) content= <p>Network Error</p>
-    if (!isLoading && isError) content= <p>{error}</p>
+    if (!isLoading && isError) content= <p>{error.message}</p>
 
     if (!isLoading && !isError && movies?.length === 0) {
         content = <p>No videos found!</p>;
@@ -26,7 +26,7 @@ export default function LandingPage() {
     }
 
     return (
-        <section className="wrapper">
+        <section className="wrapper min-h-screen border">
             <Sidebar />
             <main className="post-container" id="lws-postContainer">
                 {content}
