@@ -1,39 +1,51 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios";
+import { baseAxios } from "../../../Tools/BaseAxios";
+
 const initialState = {
     genres: [],
     isLoading: false,
     isError: "",
-    error: ""
+    error: "",
+    genresData: []
 }
-export const fetchGenresKeyword = createAsyncThunk("Genres/getMovies", async () => {
-    const data = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=95735e862c8d7543ceee5364740d5db4");
+export const fetchGenresKeyword = createAsyncThunk("Genres/baseAxios", async (api) => {
+    const data = await baseAxios.get(api);
     return data.data;
 })
 
 const genresKeywordSlice = createSlice({
     name: "Genres",
     initialState,
+    reducers: {
+        addGenres: (state, action) => {
+            state.genres.push(action.payload)
+        },
+        removeGenres: (state, action) => {
+            const restGenres = state.genres.filter(item => item !== action.payload)
+            state.genres.push(restGenres)
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchGenresKeyword.pending, (state) => {
-                state.lists = [],
-                    state.isLoading = true,
-                    state.isError = false,
-                    state.error = ""
-            })
-            builder.addCase(fetchGenresKeyword.fulfilled, (state, action) => {
-                state.lists = action.payload,
-                    state.isLoading = false,
-                    state.isError = false,
-                    state.error = ""
-            })
-            builder.addCase(fetchGenresKeyword.rejected, (state, action) => {
-                state.lists = [],
-                    state.isLoading = false,
-                    state.isError = true,
-                    state.error = action.error;
-            })
+            state.genresData = [],
+                state.isLoading = true,
+                state.isError = false,
+                state.error = ""
+        })
+        builder.addCase(fetchGenresKeyword.fulfilled, (state, action) => {
+            state.genresData = action.payload;
+            state.isLoading = false,
+                state.isError = false,
+                state.error = ""
+        })
+        builder.addCase(fetchGenresKeyword.rejected, (state, action) => {
+            state.genresData = [],
+                state.isLoading = false,
+                state.isError = true,
+                state.error = action.error;
+        })
     }
 })
 
+export const { addGenres, removeGenres } = genresKeywordSlice.actions;
 export default genresKeywordSlice.reducer;
