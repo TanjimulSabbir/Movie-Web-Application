@@ -7,9 +7,17 @@ const initialState = {
     isError: "",
     error: ""
 }
-export const fetchPopular = createAsyncThunk("Popular/getMovies", async (queryString = "popular") => {
-    const data = await getMovies(queryString);
-    return data.results;
+export const fetchPopular = createAsyncThunk("Popular/getMovies", async ({queryString = "popular", isMovie}) => {
+    console.log({ queryString, isMovie }, "From FetchPopular Function");
+
+    if (isMovie === "movie") {
+        const data = await getMovies(`movie/${queryString}?`);
+        return data.results;
+    } else {
+        const data = await getMovies(queryString);
+        return data.results;
+    }
+
 })
 
 const PopularSlice = createSlice({
@@ -17,7 +25,7 @@ const PopularSlice = createSlice({
     initialState,
     reducers: {
         addMovies: (state, action) => {
-            console.log(action.payload,"AddMovies from Sidebar Generes")
+            console.log(action.payload, "AddMovies from Sidebar Generes")
             state.movies.push(action.payload)
         }
     },

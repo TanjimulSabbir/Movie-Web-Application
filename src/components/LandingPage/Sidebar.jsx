@@ -9,7 +9,6 @@ function Sidebar() {
     const dispatch = useDispatch();
     const { lists, isLoading, isError, error } = useSelector((state) => state.genreListsReducer);
     const { genres, genresData } = useSelector((state) => state.genresKeywordReducer);
-    const { movies } = useSelector((state) => state.popularReducer);
 
     console.log(lists)
 
@@ -23,7 +22,7 @@ function Sidebar() {
     }
 
     const handleChoice = (choice) => {
-        dispatch(fetchPopular(choice))
+        dispatch(fetchPopular({ queryString: choice, isMovie: "movie" }))
     }
     const handleGenre = (genreId) => {
         if (genres.includes(genreId)) {
@@ -34,8 +33,9 @@ function Sidebar() {
         }
     }
     const handleSearchByGenres = async (genres) => {
-        dispatch(fetchGenresKeyword(genres))
-        addMovies(genresData)
+        const genreApi = genres.map(item => item).join(",")
+        dispatch(fetchPopular({ queryString: `discover/movie?with_genres=${genreApi}`, isMovie: "" }))
+
     }
     return (
         <aside>

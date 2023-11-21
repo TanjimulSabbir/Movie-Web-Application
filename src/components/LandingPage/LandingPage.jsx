@@ -11,7 +11,7 @@ export default function LandingPage() {
     const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 
     useEffect(() => {
-        dispatch(fetchPopular("popular"))
+        dispatch(fetchPopular({queryString:"popular",isMovie:"movie"}))
     },[dispatch])
 
     let content;

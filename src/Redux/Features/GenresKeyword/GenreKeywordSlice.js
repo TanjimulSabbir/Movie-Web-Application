@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { baseAxios } from "../../../Tools/BaseAxios";
-import { fetchPopular } from "../Movies/PopularSlice";
 
 const initialState = {
     genres: [],
