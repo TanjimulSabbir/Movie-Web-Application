@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getMovies } from "../../../Tools/getMovies";
-import toast from "react-hot-toast";
+
 const initialState = {
     movies: [],
     isLoading: false,

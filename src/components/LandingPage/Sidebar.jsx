@@ -1,42 +1,29 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenreLists } from "../../Redux/Features/GenreLists/GenreListsSlice.js"
-import { addMovies, fetchPopular } from "../../Redux/Features/Movies/PopularSlice.js";
-import { addGenres, fetchGenresKeyword, removeGenres } from "../../Redux/Features/GenresKeyword/GenreKeywordSlice.js";
-import toast from "react-hot-toast";
+
+import Genres from "./Genres.jsx";
+import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice.js";
 
 function Sidebar() {
     const dispatch = useDispatch();
-    const { lists, isLoading, isError, error } = useSelector((state) => state.genreListsReducer);
+    const { lists, isError, error } = useSelector((state) => state.genreListsReducer);
     const { genres, genresData } = useSelector((state) => state.genresKeywordReducer);
-
-    console.log(lists)
+    const renderError = "flex items-center justify-center text-red-600 text-2xl";
 
     useEffect(() => {
         dispatch(fetchGenreLists())
     }, [dispatch])
-
-    if (isError) return <p>{error.message}</p>
+    
+    if (isError) return <p className={renderError}>{error.message}</p>
     if (lists?.length < 0) {
-        return <p>Genre not found</p>
+        return <p className={renderError}>Genres not found</p>
     }
 
     const handleChoice = (choice) => {
         dispatch(fetchPopular({ queryString: choice, isMovie: "movie" }))
     }
-    const handleGenre = (genreId) => {
-        if (genres.includes(genreId)) {
-            dispatch(removeGenres(genreId))
-        } else {
-            if (genres.length === 4) return toast.success("you can search only 4 genres by one")
-            dispatch(addGenres(genreId))
-        }
-    }
-    const handleSearchByGenres = async (genres) => {
-        const genreApi = genres.map(item => item).join(",")
-        dispatch(fetchPopular({ queryString: `discover/movie?with_genres=${genreApi}`, isMovie: "" }))
 
-    }
     return (
         <aside>
             <div className="sidebar-items">
@@ -49,21 +36,7 @@ function Sidebar() {
                         <option value="top_rated">Top Rated</option>
                     </select>
                 </div>
-                <div className="sidebar-content">
-                    <h4 className="text-white my-4">Genres</h4>
-                    <div className="grid grid-cols-2 gap-x-2 gap-y-3 items-center">
-                        {
-                            lists?.map(list => {
-                                return (
-                                    <div onClick={() => handleGenre(list.id)} key={list.id} className={`cursor-pointer ${genres.includes(list.id) ? "bg-black font-bold rounded-full text-center" : ""}`}>
-                                        <span className="lws-badge">{list.name} </span>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <p onClick={() => handleSearchByGenres(genres)} className="btn btn-outline mt-10 cursor-pointer">Search By Genres</p>
-                </div>
+                <Genres />
             </div>
         </aside>
 
