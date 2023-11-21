@@ -9,9 +9,10 @@ const initialState = {
     genresData: []
 }
 export const fetchGenresKeyword = createAsyncThunk("Genres/baseAxios", async (api) => {
-    const data = await baseAxios.get(api);
+    const modifiedApi = api.map(item => item).join(",");
+    const data = await baseAxios.get(`/discover/movie?with_genres=${modifiedApi}`);
     return data.data;
-})
+});
 
 const genresKeywordSlice = createSlice({
     name: "Genres",
@@ -22,7 +23,7 @@ const genresKeywordSlice = createSlice({
         },
         removeGenres: (state, action) => {
             const restGenres = state.genres.filter(item => item !== action.payload)
-            state.genres.push(restGenres)
+            state.genres = restGenres
         }
     },
     extraReducers: (builder) => {

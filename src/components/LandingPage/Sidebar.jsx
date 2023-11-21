@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenreLists } from "../../Redux/Features/GenreLists/GenreListsSlice.js"
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice.js";
-import toast, { Toaster } from "react-hot-toast";
+import { addGenres, fetchGenresKeyword, removeGenres } from "../../Redux/Features/GenresKeyword/GenreKeywordSlice.js";
 
 function Sidebar() {
     const dispatch = useDispatch();
     const { lists, isLoading, isError, error } = useSelector((state) => state.genreListsReducer);
+    const { genres, genresData } = useSelector((state) => state.genresKeywordReducer)
 
     console.log(lists)
 
@@ -14,8 +15,6 @@ function Sidebar() {
         dispatch(fetchGenreLists())
     }, [dispatch])
 
-
-    // if (isLoading) return <Loading />
     if (isError) return <p>{error.message}</p>
     if (lists?.length < 0) {
         return <p>Genre not found</p>
@@ -25,8 +24,15 @@ function Sidebar() {
         dispatch(fetchPopular(choice))
     }
     const handleGenre = (genreId) => {
-        toast.success(genreId)
-        // dispatch(fetchPopular())
+        if (genres.includes(genreId)) {
+            console.log("Genre Remove Clicked")
+            dispatch(removeGenres(genreId))
+            dispatch(fetchGenresKeyword(genres))
+        } else {
+            dispatch(addGenres(genreId))
+            dispatch(fetchGenresKeyword(genres))
+        }
+
         console.log(genreId, "genreId")
     }
     return (
@@ -47,7 +53,7 @@ function Sidebar() {
                         {
                             lists?.map(list => {
                                 return (
-                                    <div onClick={() => handleGenre(list.id)} key={list.id} className="cursor-pointer">
+                                    <div onClick={() => handleGenre(list.id)} key={list.id} className={`cursor-pointer ${genres.includes(list.id) ? "bg-black font-bold rounded-full text-center":""}`}>
                                         <span className="lws-badge">{list.name} </span>
                                     </div>
                                 )
