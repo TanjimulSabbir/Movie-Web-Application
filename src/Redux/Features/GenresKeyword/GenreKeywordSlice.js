@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { baseAxios } from "../../../Tools/BaseAxios";
+import { fetchPopular } from "../Movies/PopularSlice";
 
 const initialState = {
     genres: [],
@@ -11,7 +12,7 @@ const initialState = {
 export const fetchGenresKeyword = createAsyncThunk("Genres/baseAxios", async (api) => {
     const modifiedApi = api.map(item => item).join(",");
     const data = await baseAxios.get(`/discover/movie?with_genres=${modifiedApi}`);
-    return data.data;
+    return data.data.results;
 });
 
 const genresKeywordSlice = createSlice({

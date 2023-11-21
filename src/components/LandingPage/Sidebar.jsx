@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenreLists } from "../../Redux/Features/GenreLists/GenreListsSlice.js"
-import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice.js";
+import { addMovies, fetchPopular } from "../../Redux/Features/Movies/PopularSlice.js";
 import { addGenres, fetchGenresKeyword, removeGenres } from "../../Redux/Features/GenresKeyword/GenreKeywordSlice.js";
+import toast from "react-hot-toast";
 
 function Sidebar() {
     const dispatch = useDispatch();
     const { lists, isLoading, isError, error } = useSelector((state) => state.genreListsReducer);
-    const { genres, genresData } = useSelector((state) => state.genresKeywordReducer)
+    const { genres, genresData } = useSelector((state) => state.genresKeywordReducer);
+    const { movies } = useSelector((state) => state.popularReducer);
 
     console.log(lists)
 
@@ -25,15 +27,15 @@ function Sidebar() {
     }
     const handleGenre = (genreId) => {
         if (genres.includes(genreId)) {
-            console.log("Genre Remove Clicked")
             dispatch(removeGenres(genreId))
-            dispatch(fetchGenresKeyword(genres))
         } else {
+            if (genres.length === 4) return toast.success("you can search only 4 genres by one")
             dispatch(addGenres(genreId))
-            dispatch(fetchGenresKeyword(genres))
         }
-
-        console.log(genreId, "genreId")
+    }
+    const handleSearchByGenres = async (genres) => {
+        dispatch(fetchGenresKeyword(genres))
+        addMovies(genresData)
     }
     return (
         <aside>
@@ -48,18 +50,19 @@ function Sidebar() {
                     </select>
                 </div>
                 <div className="sidebar-content">
-                    <h4>Genres</h4>
+                    <h4 className="text-white my-4">Genres</h4>
                     <div className="grid grid-cols-2 gap-x-2 gap-y-3 items-center">
                         {
                             lists?.map(list => {
                                 return (
-                                    <div onClick={() => handleGenre(list.id)} key={list.id} className={`cursor-pointer ${genres.includes(list.id) ? "bg-black font-bold rounded-full text-center":""}`}>
+                                    <div onClick={() => handleGenre(list.id)} key={list.id} className={`cursor-pointer ${genres.includes(list.id) ? "bg-black font-bold rounded-full text-center" : ""}`}>
                                         <span className="lws-badge">{list.name} </span>
                                     </div>
                                 )
                             })
                         }
                     </div>
+                    <p onClick={() => handleSearchByGenres(genres)} className="btn btn-outline mt-10 cursor-pointer">Search By Genres</p>
                 </div>
             </div>
         </aside>
