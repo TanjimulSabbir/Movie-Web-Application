@@ -27,7 +27,7 @@ export default function LandingPage() {
     }
 
     return (
-        <section className="wrapper min-h-screen border">
+        <section className="wrapper min-h-screen">
             <Sidebar />
             <main className="post-container" id="lws-postContainer">
                 {content}

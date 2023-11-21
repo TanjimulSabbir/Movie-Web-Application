@@ -28,19 +28,19 @@ const MovieDetails = () => {
     } = movie;
 
     return (
-        <div>
-            <div key={id} className='flex flex-col lg:flex-row lg:space-x-10 h-full py-4 shadow-md border border-gray-700 p-4 rounded-lg'>
-                <div className='w-full md:w-2/3 mx-auto lg:w-2/6'>
+        <div className='py-10'>
+            <div key={id} className='flex flex-col lg:flex-row lg:space-x-10 h-full py-4 p-4 rounded-lg'>
+                <div className='w-full md:w-2/3 mx-auto lg:w-full'>
                     <img className='min-h-full object-cover object-center rounded-lg'
                         src={`https://image.tmdb.org/t/p/original/${poster_path}`} alt={""} srcSet="" />
                 </div>
-                <div className='w-full lg:w-4/6 h-full'>
+                <div className='w-full h-full'>
 
                     <div className='my-8'>
                         <h2 className="text-2xl mb-2">{original_title} <small>(Episode: {popularity})</small></h2>
 
                         <p className='space-x-1'>
-                            {genres?.map((data, ind) => <span key={ind}>{data}</span>)}
+                            {genres?.map((data, ind) => <span key={ind}>{data.name}</span>)}
                         </p>
                         <span>Runtime:
                             {
@@ -77,9 +77,9 @@ const MovieDetails = () => {
                         <button title='Rate this Movie' className='border text-xl rounded-full p-2 text-white focus:bg-green-600 focus:border-green-600'><AiOutlineStar /></button>
                     </div>
                 </div>
-            </div>
-            <div className='py-8 text-center'>
-                <Link to={`/`} className='border border-emerald-500 px-4 py-2 rounded-3xl text-emerald-500'>Back</Link>
+                <div className='py-8 text-center'>
+                    <Link to={`/`} className='border border-emerald-500 px-4 py-2 rounded-3xl text-emerald-500'>Back</Link>
+                </div>
             </div>
         </div>
     );

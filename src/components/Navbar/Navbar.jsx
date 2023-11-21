@@ -5,7 +5,7 @@ function Navbar() {
     }
     return (
         <div>
-            <nav className="py-4 border-b">
+            <nav className="bg-black py-6">
                 <div className="navbar-container">
                     {/* <!-- logo --> */}
                     <div className="logo uppercase">
