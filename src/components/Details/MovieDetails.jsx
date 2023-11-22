@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchDetailsMovie } from '../../Redux/Features/Details/DetailsSlice';
 import Loading from '../Shared/Loading';
+import DetailsHeader from './DetailsHeader';
 
 const MovieDetails = () => {
     const { movie, isLoading, isError, error } = useSelector((state => state.detailsMovieReducer))
@@ -28,7 +29,8 @@ const MovieDetails = () => {
     } = movie;
 
     return (
-        <div className='py-10'>
+        <div className='pt-5 pb-10'>
+            <DetailsHeader/>
             <div key={id} className='flex flex-col lg:flex-row lg:space-x-10 h-full py-4 p-4 rounded-lg'>
                 <div className='w-full md:w-2/3 mx-auto lg:w-full'>
                     <img className='min-h-full object-cover object-center rounded-lg'
