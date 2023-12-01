@@ -5,13 +5,13 @@ function Navbar() {
     }
     return (
         <div>
-            <nav className="bg-black py-6">
+            <nav className="bg-black py-6 text-white">
                 <div className="navbar-container">
                     {/* <!-- logo --> */}
                     <div className="logo uppercase">
                         <Link to="/">
                             {/* <img src={logo} alt="search" /> */}
-                         My Movies
+                       Cinema Savvy
                         </Link>
                     </div>
                     <div className="flex gap-x-10">
@@ -21,10 +21,10 @@ function Navbar() {
                         <button onClick={()=>handleChoice("more")}>More</button>
                     </div>
                     {/* <!-- auth buttons , This will nonfunctional, just for nice looking --> */}
-                    <div className="auth-buttons">
-                        <button className="btn btn-primary">+</button>
-                        <button className="btn btn-outline">Account</button>
-                        <button className="btn btn-outline">Search</button>
+                    <div className="auth-buttons ">
+                        <button className="btn btn-primary text-white">+</button>
+                        <button className="btn btn-outline text-white">Account</button>
+                        <button className="btn btn-outline text-white">Search</button>
                     </div>
                 </div>
             </nav>
