@@ -7,7 +7,6 @@ export const apiSlice = createApi({
         baseUrl: baseAxios,
         prepareHeaders: async (headers, { getState, endpoint }) => {
             const token = getState().auth?.accessToken;
-            console.log(token, "from apiSlice")
             if (token) {
                 headers.set("Authorization", `Bearer ${token}`)
             }
