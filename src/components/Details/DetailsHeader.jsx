@@ -18,19 +18,19 @@ function DetailsHeader() {
                     {(openMenu === "overviewTrue") && <OverView />}
                 </li>
 
-                <li onMouseEnter={() => setOpenMenu("mediaTrue")} onMouseLeave={() => setOpenMenu("mediafalse")} className="relative text-sm border-b-4 pb-2 flex items-start">
+                <li onMouseEnter={() => setOpenMenu("mediaTrue")} onMouseLeave={() => setOpenMenu("mediafalse")} className="relative text-sm pb-2 flex items-start">
                     <p className="cursor-pointer flex text-white">Media{triangle}</p>
                     {(openMenu === "mediaTrue") && <Media />}
                 </li>
 
-                <li onMouseEnter={() => setOpenMenu("fandomTrue")} onMouseLeave={() => setOpenMenu("fandomfalse")} className="relative text-sm border-b-4 pb-2 flex items-start">
+                <li onMouseEnter={() => setOpenMenu("fandomTrue")} onMouseLeave={() => setOpenMenu("fandomfalse")} className="relative text-sm pb-2 flex items-start">
                     <p className="cursor-pointer flex text-whiteMed text-white">Fandom{triangle}</p>
                     {
                         openMenu === "fandomTrue" && <Fandom />
                     }
                 </li>
 
-                <li onMouseEnter={() => setOpenMenu("shareTrue")} onMouseLeave={() => setOpenMenu("sharefalse")} className="relative text-sm border-b-4 pb-2 flex items-start">
+                <li onMouseEnter={() => setOpenMenu("shareTrue")} onMouseLeave={() => setOpenMenu("sharefalse")} className="relative text-sm pb-2 flex items-start">
                     <p className="cursor-pointer flex text-white">Share{triangle}</p>
                     {
                         openMenu === "shareTrue" && <Share />
