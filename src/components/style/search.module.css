@@ -2,8 +2,8 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    background: var(--accountGreen);
+    background: var(--tmdbLightGreen);
     color: white;
-    padding: 12px 15px;
+    padding: 12px 25px;
     border-radius: 23px;
 }

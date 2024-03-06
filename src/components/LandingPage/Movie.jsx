@@ -9,12 +9,8 @@ export default function Movie({ data }) {
                 <img src={`https://image.tmdb.org/t/p/original/${poster_path}`} className="lws-card-image" alt="" />
             </Link>
             <div className="p-4">
-                {/* <div className="lws-card-header">
                 
-                    <p className="lws-likeCount"><i className="fa-regular fa-thumbs-up"></i>100</p>
-                </div> */}
                 <Link to={`/${id}`} className="lws-postTitle"> {original_title} </Link>
-                {/* <div className="lws-tags">#{genres?.map(item=>item.name)}</div> */}
                 <p className="text-sm mt-2">{overview?.slice(0,100)}...</p>
                 {/* <!-- Show this element if post is saved --> */}
                 <div className="flex gap-2 mt-4 cursor-pointer">

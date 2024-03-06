@@ -5,6 +5,7 @@ import Movie from "./Movie";
 import { useEffect } from "react";
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
 import Search from "./Search";
+import Toggle from "../../accessories/Toggle"
 
 
 export default function LandingPage() {
@@ -26,13 +27,14 @@ export default function LandingPage() {
     if (!isLoading && !isError && movies?.length > 0) {
         content = movies.map(data => <Movie key={data.id} data={data}></Movie>)
     }
-
+    const ToggleData = [{ title: "Today", "path": "" }, { title: "This week", path: "" }]
     return (
         <div className="container">
             <Search />
-            <section className="wrapper min-h-screen">
-                <Sidebar />
-                <main className="post-container" id="">
+            <section className="min-h-screen">
+                {/* <Sidebar /> */}
+                <main>
+                    <Toggle data={ToggleData} type="Trending" />
                     {content}
                 </main >
             </section>
