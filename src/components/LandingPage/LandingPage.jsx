@@ -4,6 +4,7 @@ import Loading from "../Shared/Loading";
 import Movie from "./Movie";
 import { useEffect } from "react";
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
+import Search from "./Search";
 
 
 export default function LandingPage() {
@@ -11,13 +12,13 @@ export default function LandingPage() {
     const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 
     useEffect(() => {
-        dispatch(fetchPopular({queryString:"popular",isMovie:"movie"}))
-    },[dispatch])
+        dispatch(fetchPopular({ queryString: "popular", isMovie: "movie" }))
+    }, [dispatch])
 
     let content;
-    if (isLoading) content= <Loading />
-    if (isLoading && isError) content= <p>Network Error</p>
-    if (!isLoading && isError) content= <p>{error.message}</p>
+    if (isLoading) content = <Loading />
+    if (isLoading && isError) content = <p>Network Error</p>
+    if (!isLoading && isError) content = <p>{error.message}</p>
 
     if (!isLoading && !isError && movies?.length === 0) {
         content = <p>No videos found!</p>;
@@ -27,11 +28,14 @@ export default function LandingPage() {
     }
 
     return (
-        <section className="wrapper min-h-screen">
-            <Sidebar />
-            <main className="post-container" id="lws-postContainer">
-                {content}
-            </main >
-        </section>
+        <div className="container">
+            <Search />
+            <section className="wrapper min-h-screen">
+                <Sidebar />
+                <main className="post-container" id="">
+                    {content}
+                </main >
+            </section>
+        </div>
     )
 }

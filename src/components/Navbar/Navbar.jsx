@@ -1,34 +1,33 @@
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { IoSearchSharp } from "react-icons/io5";
+import style from "../style/navbar.module.css"
 function Navbar() {
-    const handleChoice=()=>{
+    const handleChoice = () => {
 
     }
     return (
-        <div>
-            <nav className="bg-black py-6 text-white">
+        <>
+            <nav className={style.navbarContainter}>
                 <div className="navbar-container">
-                    {/* <!-- logo --> */}
-                    <div className="logo uppercase">
+                    <div className="flex gap-x-10 items-center w-full">
                         <Link to="/">
                             {/* <img src={logo} alt="search" /> */}
-                       Cinema Savvy
+                            Cinema Savvy
                         </Link>
-                    </div>
-                    <div className="flex gap-x-10">
-                        <button onClick={()=>handleChoice("movies")}>Movies</button>
-                        <button onClick={()=>handleChoice("tvshows")}>TV Shows</button>
-                        <button onClick={()=>handleChoice("genres")}>Genres</button>
-                        <button onClick={()=>handleChoice("more")}>More</button>
+                        <button onClick={() => handleChoice("movies")}>Movies</button>
+                        <button onClick={() => handleChoice("tvshows")}>TV Shows</button>
+                        <button onClick={() => handleChoice("genres")}>Genres</button>
+                        <button onClick={() => handleChoice("more")}>More</button>
                     </div>
                     {/* <!-- auth buttons , This will nonfunctional, just for nice looking --> */}
-                    <div className="auth-buttons ">
-                        <button className="btn btn-primary text-white">+</button>
-                        <button className="btn btn-outline text-white">Account</button>
-                        <button className="btn btn-outline text-white">Search</button>
+                    <div className="w-full flex items-center justify-end space-x-10">
+                        <button className="">Login</button>
+                        <button className="">Join Us</button>
+                        <button className={style.SearchBtn}> <IoSearchSharp className="text-2xl" /></button>
                     </div>
                 </div>
             </nav>
-        </div>
+        </>
     )
 }
 
