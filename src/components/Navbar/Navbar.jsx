@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import style from "../style/navbar.module.css"
+import logo from "../../assets/Logo/logo.svg"
 function Navbar() {
     const handleChoice = () => {
 
@@ -11,8 +12,7 @@ function Navbar() {
                 <div className="navbar-container">
                     <div className="flex gap-x-10 items-center w-full">
                         <Link to="/">
-                            {/* <img src={logo} alt="search" /> */}
-                            Cinema Savvy
+                            <img src={logo} alt="search" width={80} height={80}/>
                         </Link>
                         <button onClick={() => handleChoice("movies")}>Movies</button>
                         <button onClick={() => handleChoice("tvshows")}>TV Shows</button>
