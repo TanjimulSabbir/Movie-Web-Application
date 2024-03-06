@@ -29,14 +29,15 @@ export default function LandingPage() {
     }
     const ToggleData = [{ title: "Today", "path": "" }, { title: "This week", path: "" }]
     return (
-        <div className="container">
+        <div>
             <Search />
             <section className="min-h-screen">
                 {/* <Sidebar /> */}
-                <main>
-                    <Toggle data={ToggleData} type="Trending" />
+
+                <Toggle data={ToggleData} type="Trending" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 items-center gap-5">
                     {content}
-                </main >
+                </div>
             </section>
         </div>
     )

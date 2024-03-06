@@ -2,8 +2,8 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    background: var(--tmdbLightGreen);
+    background: var(--tmdbLightBlue);
     color: white;
-    padding: 12px 25px;
+    padding: 12px 30px;
     border-radius: 23px;
 }
