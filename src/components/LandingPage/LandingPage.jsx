@@ -6,19 +6,19 @@ import { useEffect } from "react";
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
 import Search from "./Search";
 import Toggle from "../../accessories/Toggle"
-import { usePopularQuery } from "../../Redux/Features/Api/MovieApi";
+import { useGetPopularQuery } from "../../Redux/Features/Api/movieApi";
 
 
 export default function LandingPage() {
-    const { data } = usePopularQuery();
-    console.log(data, "popular Movies")
+    const { data: PopularMovies, isLoading, isError, error } = useGetPopularQuery();
+    console.log({ PopularMovies, error }, "popular Movies")
     const dispatch = useDispatch();
-    const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
+    // const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 
     useEffect(() => {
         dispatch(fetchPopular({ queryString: "popular", isMovie: "movie" }))
     }, [dispatch])
-
+    return "This is new features"
     let content;
     if (isLoading) content = <Loading />
     if (isLoading && isError) content = <p>Network Error</p>

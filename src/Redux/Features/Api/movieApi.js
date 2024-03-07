@@ -1,18 +1,20 @@
 import { apiSlice } from "./apiSlice";
 
-const movieApi = apiSlice.injectEndpoints({
+
+
+export const movieApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        popular: builder.query({
+        getPopular: builder.query({
             query: () => {
                 return {
-                    url: "movie/popular"
-                }
-            }
+                    url: "/users",
+                    method: "GET"
+                };
+            },
+
         }),
-        thisWeek: builder.query({
-            query: () => ({ url: "/movie/" })
-        })
+
     })
 })
 
-export const { usePopularQuery, useThisWeekQuery } = movieApi;
+export const { useGetPopularQuery } = movieApi;
