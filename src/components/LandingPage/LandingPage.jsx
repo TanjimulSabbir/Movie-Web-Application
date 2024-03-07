@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
 import Search from "./Search";
 import Toggle from "../../accessories/Toggle"
+import { usePopularQuery } from "../../Redux/Features/Api/MovieApi";
 
 
 export default function LandingPage() {
+    const { data } = usePopularQuery();
+    console.log(data, "popular Movies")
     const dispatch = useDispatch();
     const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 

@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import GenreListsSlice from "./GenreLists/GenreListsSlice";
-import PopularSlice from "./Movies/PopularSlice";
-import genresKeywordSlice from "./GenresKeyword/GenreKeywordSlice";
-import detailsSlice from "./Details/DetailsSlice";
+import { apiSlice } from "./Api/apiSlice";
 
 
 
 const store = configureStore({
-    reducer: { popularReducer: PopularSlice, genreListsReducer: GenreListsSlice, genresKeywordReducer: genresKeywordSlice, detailsMovieReducer: detailsSlice }
+    reducer: { [apiSlice.reducerPath]: apiSlice.reducer },
+    middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(apiSlice.middleware)
+
 })
 
 export default store;
