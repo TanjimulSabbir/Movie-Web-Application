@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import { fetchPopular } from "../../Redux/Features/Movies/PopularSlice";
 import Search from "./Search";
 import Toggle from "../../accessories/Toggle"
-import { useGetPopularQuery } from "../../Redux/Features/Api/movieApi";
+import { useGetPopularQuery } from "../../Redux/Features/Api/apiSlice";
+
 
 
 export default function LandingPage() {
@@ -15,9 +16,6 @@ export default function LandingPage() {
     const dispatch = useDispatch();
     // const { movies, isLoading, isError, error } = useSelector((state) => state.popularReducer);
 
-    useEffect(() => {
-        dispatch(fetchPopular({ queryString: "popular", isMovie: "movie" }))
-    }, [dispatch])
     return "This is new features"
     let content;
     if (isLoading) content = <Loading />

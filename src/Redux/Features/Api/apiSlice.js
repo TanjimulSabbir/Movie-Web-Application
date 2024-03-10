@@ -6,5 +6,14 @@ export const apiSlice = createApi({
         baseURL: "https://jsonplaceholder.typicode.com",
     }),
     tagTypes: [],
-    endpoints: (builder) => ({})
+    endpoints: (builder) => ({
+        getPopular: builder.query({
+            query: () => ({
+                url: "/users",
+                method: "GET",
+            }),
+        }),
+    }),
 });
+
+export const { useGetPopularQuery } = apiSlice;
